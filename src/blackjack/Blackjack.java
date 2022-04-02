@@ -6,6 +6,7 @@ public class Blackjack {
 
     public static void main(String[] args){
 
+        Scanner userInput = new Scanner(System.in);
         System.out.println("Welcome to Blackjack!");
 
         Deck playingDeck = new Deck();
@@ -18,9 +19,10 @@ public class Blackjack {
         //Create deck for dealer
         Deck dealerDeck = new Deck();
 
-        double playerMoney = 100.00;
+        System.out.println("How much money would you like to start with? ");
+        double playerMoney = userInput.nextDouble();
 
-        Scanner userInput = new Scanner(System.in);
+
 
         //Game Loop
         while(playerMoney > 0){
@@ -65,13 +67,17 @@ public class Blackjack {
                         endRound = true;
                         break;
                     }
+                    if(playerDeck.cardsValue() == 21){
+                        System.out.println("Auto Stand");
+                        break;
+                    }
                 }
 
                 if(response == 2){
                     break;
                 }
             }
-            //Reveal Dealer CArds
+            //Reveal Dealer Cards
             System.out.println("Dealer Cards: " + dealerDeck.toString());
 
             if(dealerDeck.cardsValue() > playerDeck.cardsValue() && endRound == false){
